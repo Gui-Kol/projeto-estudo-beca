@@ -8,4 +8,6 @@ public interface RepositorioDeClient {
     Client cadastrarClient(Client client);
 
     List<Client> listarClients();
+
+    void deletarClientById(Long clientId);
 }

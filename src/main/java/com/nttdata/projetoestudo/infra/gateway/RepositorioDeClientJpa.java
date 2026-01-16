@@ -31,4 +31,9 @@ public class RepositorioDeClientJpa implements RepositorioDeClient {
                 .map(mapper::toClient)
                 .toList();
     }
+
+    @Override
+    public void deletarClientById(Long clientId) {
+        repository.deleteById(clientId);
+    }
 }
