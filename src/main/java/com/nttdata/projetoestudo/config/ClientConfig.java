@@ -4,6 +4,7 @@ import com.nttdata.projetoestudo.application.repository.RepositorioDeClient;
 import com.nttdata.projetoestudo.application.usecases.CadastrarClient;
 import com.nttdata.projetoestudo.application.usecases.DeletarClient;
 import com.nttdata.projetoestudo.application.usecases.ListarClient;
+import com.nttdata.projetoestudo.application.usecases.ListarClientPorNome;
 import com.nttdata.projetoestudo.infra.gateway.ClientMapper;
 import com.nttdata.projetoestudo.infra.gateway.RepositorioDeClientJpa;
 import com.nttdata.projetoestudo.infra.persistence.RepositoryClient;
@@ -36,6 +37,11 @@ public class ClientConfig {
     @Bean
     DeletarClient deletarClient(RepositorioDeClient repository){
         return new DeletarClient(repository);
+    }
+
+    @Bean
+    ListarClientPorNome listarClientPorNome(RepositorioDeClient repository){
+        return new ListarClientPorNome(repository);
     }
 
 

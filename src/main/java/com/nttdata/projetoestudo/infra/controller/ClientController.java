@@ -1,12 +1,12 @@
 package com.nttdata.projetoestudo.infra.controller;
 
 
+import com.nttdata.projetoestudo.application.Dto.ClientDto;
 import com.nttdata.projetoestudo.application.usecases.CadastrarClient;
 import com.nttdata.projetoestudo.application.usecases.DeletarClient;
 import com.nttdata.projetoestudo.application.usecases.ListarClient;
+import com.nttdata.projetoestudo.application.usecases.ListarClientPorNome;
 import com.nttdata.projetoestudo.domain.entity.client.Client;
-import com.nttdata.projetoestudo.infra.gateway.RepositorioDeClientJpa;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,11 +17,13 @@ public class ClientController {
     private final CadastrarClient cadastrarClient;
     private final ListarClient listar;
     private final DeletarClient deletarClient;
+    private final ListarClientPorNome listarClientPorNome;
 
-    public ClientController(CadastrarClient cadastrarClient, ListarClient listar, DeletarClient deletarClient) {
+    public ClientController(CadastrarClient cadastrarClient, ListarClient listar, DeletarClient deletarClient, ListarClientPorNome listarClientPorNome) {
         this.cadastrarClient = cadastrarClient;
         this.listar = listar;
         this.deletarClient = deletarClient;
+        this.listarClientPorNome = listarClientPorNome;
     }
 
     @PostMapping
@@ -37,6 +39,11 @@ public class ClientController {
     @GetMapping
     public ResponseEntity listarClients() {
         var clients = listar.listar();
+        return ResponseEntity.ok(clients);
+    }
+    @GetMapping("/{name}")
+    public ResponseEntity listarClients(@PathVariable String name) {
+        var clients = listarClientPorNome.listar(name);
         return ResponseEntity.ok(clients);
     }
     @DeleteMapping("/{id}")

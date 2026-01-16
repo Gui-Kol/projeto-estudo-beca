@@ -1,4 +1,4 @@
-package com.nttdata.projetoestudo.infra.controller;
+package com.nttdata.projetoestudo.application.Dto;
 
 public record ClientDto(
         String name,

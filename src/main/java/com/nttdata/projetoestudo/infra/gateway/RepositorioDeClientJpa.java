@@ -2,7 +2,6 @@ package com.nttdata.projetoestudo.infra.gateway;
 
 import com.nttdata.projetoestudo.application.repository.RepositorioDeClient;
 import com.nttdata.projetoestudo.domain.entity.client.Client;
-import com.nttdata.projetoestudo.infra.persistence.ClientEntity;
 import com.nttdata.projetoestudo.infra.persistence.RepositoryClient;
 
 import java.util.List;
@@ -36,4 +35,14 @@ public class RepositorioDeClientJpa implements RepositorioDeClient {
     public void deletarClientById(Long clientId) {
         repository.deleteById(clientId);
     }
+
+    @Override
+    public List<Client> listarClientsPorNome(String nome) {
+        return repository.findByNameIgnoreCase(nome)
+                .stream()
+                .map(mapper::toClient)
+                .toList();
+    }
+
+
 }

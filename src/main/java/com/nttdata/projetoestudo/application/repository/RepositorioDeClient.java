@@ -10,4 +10,6 @@ public interface RepositorioDeClient {
     List<Client> listarClients();
 
     void deletarClientById(Long clientId);
+
+    List<Client> listarClientsPorNome(String name);
 }
