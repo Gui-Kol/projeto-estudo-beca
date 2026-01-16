@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS public.clients (
+    id      BIGSERIAL PRIMARY KEY,
+    name    VARCHAR(100) NOT NULL,
+    email   VARCHAR(100) NOT NULL UNIQUE,
+    cpf     VARCHAR(11)  NOT NULL UNIQUE
+);
