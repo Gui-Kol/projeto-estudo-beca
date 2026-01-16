@@ -34,4 +34,12 @@ public class Client {
     public int getCpf() {
         return cpf;
     }
+
+    @Override
+    public String toString() {
+        return  "id= " + id +
+                "\nname= " + name +
+                "\nemail= " + email +
+                "\ncpf= " + cpf;
+    }
 }

@@ -44,5 +44,13 @@ public class RepositorioDeClientJpa implements RepositorioDeClient {
                 .toList();
     }
 
+    @Override
+    public List<Client> listarClientsPorEmail(String clientEmail) {
+        return repository.findByEmailIgnoreCase(clientEmail)
+                .stream()
+                .map(mapper::toClient)
+                .toList();
+    }
+
 
 }

@@ -12,4 +12,6 @@ public interface RepositorioDeClient {
     void deletarClientById(Long clientId);
 
     List<Client> listarClientsPorNome(String name);
+
+    List<Client> listarClientsPorEmail(String clientEmail);
 }
