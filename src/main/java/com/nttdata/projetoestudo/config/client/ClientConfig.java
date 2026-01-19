@@ -1,15 +1,13 @@
-package com.nttdata.projetoestudo.config;
+package com.nttdata.projetoestudo.config.client;
 
 import com.nttdata.projetoestudo.application.repository.RepositorioDeClient;
-import com.nttdata.projetoestudo.application.usecases.CadastrarClient;
-import com.nttdata.projetoestudo.application.usecases.DeletarClient;
-import com.nttdata.projetoestudo.application.usecases.ListarClient;
-import com.nttdata.projetoestudo.application.usecases.ListarClientPorNome;
+import com.nttdata.projetoestudo.application.usecases.*;
 import com.nttdata.projetoestudo.infra.gateway.ClientMapper;
 import com.nttdata.projetoestudo.infra.gateway.RepositorioDeClientJpa;
-import com.nttdata.projetoestudo.infra.persistence.RepositoryClient;
+import com.nttdata.projetoestudo.infra.persistence.ClientRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
@@ -20,8 +18,8 @@ public class ClientConfig {
     }
 
     @Bean
-    RepositorioDeClientJpa repository(RepositoryClient repository, ClientMapper mapper) {
-        return new RepositorioDeClientJpa(repository, mapper);
+    RepositorioDeClientJpa repository(ClientRepository repository, ClientMapper mapper, PasswordEncoder passwordEncoder) {
+        return new RepositorioDeClientJpa(repository, mapper, passwordEncoder);
     }
 
     @Bean
@@ -42,6 +40,11 @@ public class ClientConfig {
     @Bean
     ListarClientPorNome listarClientPorNome(RepositorioDeClient repository){
         return new ListarClientPorNome(repository);
+    }
+
+    @Bean
+    ListarClientPorEmail listarClientPorEmail(RepositorioDeClient repository){
+        return new ListarClientPorEmail(repository);
     }
 
 

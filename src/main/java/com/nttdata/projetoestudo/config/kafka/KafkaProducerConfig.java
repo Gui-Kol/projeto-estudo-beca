@@ -1,4 +1,4 @@
-package com.nttdata.projetoestudo.config;
+package com.nttdata.projetoestudo.config.kafka;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

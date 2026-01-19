@@ -1,10 +1,7 @@
 package com.nttdata.projetoestudo.application.Dto;
 
-public record ClientDto(
-        Long id,
-        String name,
+public record LoginDto(
         String email,
         String cpf
 ) {
-
 }

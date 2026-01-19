@@ -36,7 +36,7 @@ public class ClientController {
         kafkaTemplate.send("client-cadastrado", client.getEmail());
         return ResponseEntity
                 .created(uri)
-                .body(new ClientDto(client.getName(), client.getEmail(), client.getCpf()));
+                .body(listarClientPorNome.listar(dto.name()));
 
     }
 

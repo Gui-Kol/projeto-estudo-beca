@@ -2,23 +2,28 @@ package com.nttdata.projetoestudo.infra.gateway;
 
 import com.nttdata.projetoestudo.application.repository.RepositorioDeClient;
 import com.nttdata.projetoestudo.domain.entity.client.Client;
-import com.nttdata.projetoestudo.infra.persistence.RepositoryClient;
+import com.nttdata.projetoestudo.infra.persistence.ClientEntity;
+import com.nttdata.projetoestudo.infra.persistence.ClientRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
 public class RepositorioDeClientJpa implements RepositorioDeClient {
-    private final RepositoryClient repository;
+    private final ClientRepository repository;
     private final ClientMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public RepositorioDeClientJpa(RepositoryClient repository, ClientMapper mapper) {
+    public RepositorioDeClientJpa(ClientRepository repository, ClientMapper mapper, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
     @Override
     public Client cadastrarClient(Client client) {
-        var entity = mapper.toClientEntity(client);
+        ClientEntity entity = mapper.toClientEntity(client);
+        entity.setCpf(passwordEncoder.encode(entity.getCpf()));
         repository.save(entity);
         return mapper.toClient(entity);
     }
@@ -45,11 +50,8 @@ public class RepositorioDeClientJpa implements RepositorioDeClient {
     }
 
     @Override
-    public List<Client> listarClientsPorEmail(String clientEmail) {
-        return repository.findByEmailIgnoreCase(clientEmail)
-                .stream()
-                .map(mapper::toClient)
-                .toList();
+    public Client listarClientsPorEmail(String clientEmail) {
+        return mapper.toClient(repository.findByEmailIgnoreCase(clientEmail));
     }
 
 

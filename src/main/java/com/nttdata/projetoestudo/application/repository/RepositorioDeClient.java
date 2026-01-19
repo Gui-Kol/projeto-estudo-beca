@@ -13,5 +13,5 @@ public interface RepositorioDeClient {
 
     List<Client> listarClientsPorNome(String name);
 
-    List<Client> listarClientsPorEmail(String clientEmail);
+    Client listarClientsPorEmail(String clientEmail);
 }

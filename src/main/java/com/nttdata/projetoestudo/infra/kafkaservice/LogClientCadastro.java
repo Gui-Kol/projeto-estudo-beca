@@ -18,7 +18,7 @@ public class LogClientCadastro {
 
     @KafkaListener(topics = "client-cadastrado", groupId = "client-group")
     public void logClientCadastro(String clientEmail) {
-        List<Client> clientInfo = repository.listarClientsPorEmail(clientEmail);
+        Client clientInfo = repository.listarClientsPorEmail(clientEmail);
 
         System.out.println("""
                 --------------------------------------------

@@ -4,15 +4,15 @@ public class Client {
     private Long id;
     private String name;
     private String email;
-    private int cpf;
+    private String cpf;
 
-    public Client(Long id, String name, String email, int cpf) {
+    public Client(Long id, String name, String email, String cpf) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.cpf = cpf;
     }
-    public Client(String name, String email, int cpf) {
+    public Client(String name, String email, String cpf) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -31,7 +31,7 @@ public class Client {
         return email;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
