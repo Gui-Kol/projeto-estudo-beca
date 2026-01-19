@@ -1,7 +1,6 @@
 package com.nttdata.projetoestudo.infra.controller;
 
 import com.nttdata.projetoestudo.application.Dto.LoginDto;
-import com.nttdata.projetoestudo.domain.entity.client.Client;
 import com.nttdata.projetoestudo.infra.gateway.ClientMapper;
 import com.nttdata.projetoestudo.infra.persistence.ClientEntity;
 import com.nttdata.projetoestudo.infra.security.TokenService;
@@ -26,9 +25,9 @@ public class AuthenticationController {
 
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody LoginDto dto) {
-        var token = new UsernamePasswordAuthenticationToken(dto.email(),dto.cpf());
+        var token = new UsernamePasswordAuthenticationToken(dto.email(), dto.cpf());
         var auth = manager.authenticate(token);
-        return ResponseEntity.ok(tokenService.gerarToken(mapper.toClient((ClientEntity)auth.getPrincipal())));
+        return ResponseEntity.ok(tokenService.gerarToken(mapper.toClient((ClientEntity) auth.getPrincipal())));
     }
 
 
